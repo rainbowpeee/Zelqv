@@ -1,0 +1,4 @@
+# qtcreator generated files
+*.pro.user*
+*.autosave
+build/
