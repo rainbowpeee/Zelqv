@@ -7,8 +7,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    m_timerID = startTimer(100);
-
+    init();
 }
 
 LoginWindow::~LoginWindow()
@@ -18,10 +17,60 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::timerEvent(QTimerEvent *event)
 {
-    if(event->timerId() == m_timerID && ui->lineEdit_2->text()== "123456")
+    if(event->timerId() == m_timerID && ui->passwordLineEdit->text()== "123456")
     {
         qDebug()<<"Correct";
         m_state = true;
         killTimer(m_timerID);
     }
+}
+
+bool LoginWindow::eventFilter(QObject *watched, QEvent *event)
+{
+    if(watched == this && event->type() == QEvent::MouseButtonPress)
+    {
+        this->setFocus();
+        if(m_keyboard->state())
+        {
+            m_keyboard->popIn(0, this->height()/3);
+        }
+    }
+    else if(watched == ui->userNameLineEdit && event->type() == QEvent::MouseButtonPress)
+    {
+        ui->userNameLineEdit->setFocus();
+        if(!m_keyboard->state())
+        {
+            m_keyboard->popUp(0, this->height()/3);
+        }
+    }
+    else if (watched == ui->passwordLineEdit && event->type() == QEvent::MouseButtonPress)
+    {
+        ui->passwordLineEdit->setFocus();
+        if(!m_keyboard->state())    //隐藏->弹出
+        {
+            m_keyboard->popUp(0, this->height()/3);
+        }
+    }
+
+    return QWidget::eventFilter(watched, event);
+}
+
+void LoginWindow::init()
+{
+    this->installEventFilter(this);
+
+    QRegExp regx("[a-zA-Z0-9]+$");
+
+    QValidator *validator0 = new QRegExpValidator(regx, ui->userNameLineEdit);
+    ui->userNameLineEdit->setValidator(validator0);
+    ui->userNameLineEdit->setMaxLength(15);
+    ui->userNameLineEdit->installEventFilter(this);
+
+    QValidator *validator1 = new QRegExpValidator(regx, ui->passwordLineEdit);
+    ui->passwordLineEdit->setValidator(validator1);
+    ui->passwordLineEdit->setMaxLength(15);
+    ui->passwordLineEdit->installEventFilter(this);
+
+    m_keyboard = new Keyboard(this);
+    m_timerID = startTimer(100);
 }
