@@ -17,11 +17,11 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::timerEvent(QTimerEvent *event)
 {
-    if(event->timerId() == m_timerID && ui->passwordLineEdit->text()== "123456")
+    if(event->timerId() == m_leTimerID && ui->passwordLineEdit->text()== "123456")
     {
         qDebug()<<"Correct";
         m_state = true;
-        killTimer(m_timerID);
+        killTimer(m_leTimerID);
     }
 }
 
@@ -72,5 +72,5 @@ void LoginWindow::init()
     ui->passwordLineEdit->installEventFilter(this);
 
     m_keyboard = new Keyboard(this);
-    m_timerID = startTimer(100);
+    m_leTimerID = startTimer(100);
 }
