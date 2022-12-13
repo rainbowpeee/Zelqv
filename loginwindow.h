@@ -42,7 +42,9 @@ private:
 private:
     Ui::LoginWindow *ui;
 
-    int m_timerID = -1;
+    int m_leTimerID = -1;
+    int m_kbTimerID = -1;
+
 
     Keyboard *m_keyboard;
 
