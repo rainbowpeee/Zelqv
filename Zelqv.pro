@@ -16,11 +16,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    3rd/md5.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    3rd/md5.h \
     loginwindow.h \
     mainwindow.h
 
@@ -35,3 +37,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 ####################### 控件库 #######################
 include($$PWD/controls/controls.pri)
+
+###################### 第三方库 ######################
+
+
