@@ -24,7 +24,6 @@ public:
      */
     void init();
 
-
     /**
      * @brief converUpLow   大小写字母转换
      */
@@ -39,13 +38,12 @@ public:
     void popUp(int x = 0, int y = 400, int msecs = 200);
     void popIn(int x = 0, int y = 400, int msecs = 200);
 
-    bool state();
-    bool popUpState();
-    bool popInState();
+    bool state();       //键盘状态  是否隐藏
+    bool popUpState();  //键盘动画  是否在弹出中
+    bool popInState();  //键盘动画  是否在弹入中
 
 signals:
     void enterSig();    //回车键信号
-
     void popUpSig();    //开始弹出信号
     void popInSig();    //开始弹入信号
 
@@ -55,9 +53,9 @@ protected:
 private:
     Ui::Keyboard *ui;
 
-    bool m_state = false;       //是否隐藏状态
-    bool m_popUpState = false;  //弹出中的状态
-    bool m_popInState = false;  //弹入中的状态
+    bool m_state = false;       //是否隐藏状态标志
+    bool m_popUpState = false;  //弹出中的状态标志
+    bool m_popInState = false;  //弹入中的状态标志
 
     QTimer *m_popUptimer = nullptr; //弹出计时器
     int m_uptimerID = -1;

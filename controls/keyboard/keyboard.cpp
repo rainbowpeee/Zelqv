@@ -12,12 +12,12 @@ Keyboard::Keyboard(QWidget *parent)
     connect(m_popUptimer, &QTimer::timeout, [=]()
     {
         m_popUptimer->stop();
-        m_popUpState = false;
+        m_popUpState = false;   //弹出完成
     });
     connect(m_popIntimer, &QTimer::timeout, [=]()
     {
         m_popIntimer->stop();
-        m_popInState = false;
+        m_popInState = false;   //弹入完成
     });
 }
 
@@ -123,8 +123,8 @@ void Keyboard::popUp(int x, int y, int msecs)
     animation->setEndValue(QRect(this->x()+x, this->y()-y, this->width(), this->height()));
     animation->setEasingCurve(QEasingCurve::OutQuint);
     animation->start();
-    m_popUpState = true;
-    m_popUptimer->start(msecs);
+    m_popUpState = true;        //弹出中
+    m_popUptimer->start(msecs); //弹出中计时
     emit popUpSig();
     m_state = !m_state;
 }
@@ -137,8 +137,8 @@ void Keyboard::popIn(int x, int y, int msecs)
     animation->setEndValue(QRect(this->x()+x, this->y()+y, this->width(), this->height()));
     animation->setEasingCurve(QEasingCurve::OutQuint);
     animation->start();
-    m_popInState = true;
-    m_popIntimer->start(msecs);
+    m_popInState = true;        //弹入中
+    m_popIntimer->start(msecs); //弹入中计时
     emit popInSig();
     m_state = !m_state;
 }
