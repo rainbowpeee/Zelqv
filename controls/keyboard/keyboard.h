@@ -52,8 +52,6 @@ signals:
 protected:
     virtual void paintEvent(QPaintEvent *event) override;
 
-    virtual void timerEvent(QTimerEvent *event) override;
-
 private:
     Ui::Keyboard *ui;
 

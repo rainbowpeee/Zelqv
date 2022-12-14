@@ -172,12 +172,4 @@ void Keyboard::paintEvent(QPaintEvent *event)
     painter.drawPath(path.simplified());
 }
 
-void Keyboard::timerEvent(QTimerEvent *event)
-{
-    Q_UNUSED(event)
-//    if(event->timerId() == m_uptimerID) //弹出
-//    {
-
-//    }
-}
 
