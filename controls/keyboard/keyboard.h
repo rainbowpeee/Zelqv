@@ -6,6 +6,7 @@
 #include <QGridLayout>
 #include "keys.h"
 #include <QPainterPath> //板端不加这个头文件会报错
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Keyboard; }
@@ -40,18 +41,32 @@ public:
     void popIn(int x = 0, int y = 400, int msecs = 200);
 
     bool state();
+    bool popUpState();
+    bool popInState();
 
 signals:
     void enterSig();    //回车键信号
 
+    void popUpSig();    //开始弹出信号
+    void popInSig();    //开始弹入信号
+
 protected:
     virtual void paintEvent(QPaintEvent *event) override;
 
+    virtual void timerEvent(QTimerEvent *event) override;
 
 private:
     Ui::Keyboard *ui;
 
-    bool m_state = false; //隐藏
+    bool m_state = false;       //是否隐藏状态
+    bool m_popUpState = false;  //弹出中的状态
+    bool m_popInState = false;  //弹入中的状态
+
+    QTimer *m_popUptimer = nullptr; //弹出计时器
+    int m_uptimerID = -1;
+    QTimer *m_popIntimer = nullptr; //弹入计时器
+    int m_intimerID = -1;
+
     bool m_letterState = false; //小写
 
     QGridLayout *gridLayout = nullptr;

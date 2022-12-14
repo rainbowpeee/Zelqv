@@ -8,8 +8,17 @@ Keyboard::Keyboard(QWidget *parent)
     ui->setupUi(this);
 
     init();
-    setWindowFlags(Qt::FramelessWindowHint);
 
+    connect(m_popUptimer, &QTimer::timeout, [=]()
+    {
+        m_popUptimer->stop();
+        m_popUpState = false;
+    });
+    connect(m_popIntimer, &QTimer::timeout, [=]()
+    {
+        m_popIntimer->stop();
+        m_popInState = false;
+    });
 }
 
 Keyboard::~Keyboard()
@@ -36,6 +45,10 @@ void Keyboard::init()
     connect(ui->toolButton_Enter, &Keys::enter, this, [=](){emit enterSig();});
     connect(ui->toolButton_CapsLk, &Keys::capsLk, this, &Keyboard::converUpLow);
 
+    m_popUptimer = new QTimer(this);
+    m_popIntimer = new QTimer(this);
+
+    setWindowFlags(Qt::FramelessWindowHint);
 }
 
 void Keyboard::converUpLow()
@@ -110,6 +123,9 @@ void Keyboard::popUp(int x, int y, int msecs)
     animation->setEndValue(QRect(this->x()+x, this->y()-y, this->width(), this->height()));
     animation->setEasingCurve(QEasingCurve::OutQuint);
     animation->start();
+    m_popUpState = true;
+    m_popUptimer->start(msecs);
+    emit popUpSig();
     m_state = !m_state;
 }
 
@@ -121,12 +137,25 @@ void Keyboard::popIn(int x, int y, int msecs)
     animation->setEndValue(QRect(this->x()+x, this->y()+y, this->width(), this->height()));
     animation->setEasingCurve(QEasingCurve::OutQuint);
     animation->start();
+    m_popInState = true;
+    m_popIntimer->start(msecs);
+    emit popInSig();
     m_state = !m_state;
 }
 
 bool Keyboard::state()
 {
     return m_state;
+}
+
+bool Keyboard::popUpState()
+{
+    return m_popUpState;
+}
+
+bool Keyboard::popInState()
+{
+    return m_popInState;
 }
 
 void Keyboard::paintEvent(QPaintEvent *event)
@@ -141,5 +170,14 @@ void Keyboard::paintEvent(QPaintEvent *event)
     QPainterPath path;
     path.addRoundedRect(QRectF(0, 0, width(), height()) , 5, 5);
     painter.drawPath(path.simplified());
+}
+
+void Keyboard::timerEvent(QTimerEvent *event)
+{
+    Q_UNUSED(event)
+//    if(event->timerId() == m_uptimerID) //弹出
+//    {
+
+//    }
 }
 

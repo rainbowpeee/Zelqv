@@ -19,13 +19,16 @@ void LoginWindow::timerEvent(QTimerEvent *event)
 {
     if(event->timerId() == m_kbTimerID)
     {
-        if(m_keyboard->state())     //隐藏状态
+        if(m_keyboard->popUpState() == false && m_keyboard->popInState() == false)
         {
-            m_keyboard->setGeometry(0, (this->height()/3)*2, this->width(), this->height()/3);
-        }
-        else                        //弹出状态
-        {
-            m_keyboard->setGeometry(0, this->height(), this->width(), this->height()/3);
+            if(m_keyboard->state())     //隐藏状态
+            {
+                m_keyboard->setGeometry(0, (this->height()/3)*2, this->width(), this->height()/3);
+            }
+            else                        //弹出状态
+            {
+                m_keyboard->setGeometry(0, this->height(), this->width(), this->height()/3);
+            }
         }
     }
 
@@ -86,5 +89,4 @@ void LoginWindow::init()
     m_keyboard = new Keyboard(this);
     m_leTimerID = startTimer(100);
     m_kbTimerID = startTimer(10);
-//    m_keyboard->move(0, this->height());
 }
