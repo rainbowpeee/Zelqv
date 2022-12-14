@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QPainter>
-#include <QGridLayout>
 #include "keys.h"
 #include <QPainterPath> //板端不加这个头文件会报错
 #include <QTimer>
@@ -68,14 +67,6 @@ private:
     int m_intimerID = -1;
 
     bool m_letterState = false; //小写
-
-    QGridLayout *gridLayout = nullptr;
-
-
-//    char letter[26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
-
-//    int m_parentWidth;
-//    int m_parentHeight;
 
 };
 #endif // KEYBOARD
