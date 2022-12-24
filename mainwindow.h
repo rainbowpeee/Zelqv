@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include "subpage.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,6 +18,13 @@ public:
     ~MainWindow();
 
 private:
+    void initUI();
+
+
+private:
     Ui::MainWindow *ui;
+
+    LoginWindow *m_lgW;
+
 };
 #endif // MAINWINDOW_H

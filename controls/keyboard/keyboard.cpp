@@ -26,31 +26,6 @@ Keyboard::~Keyboard()
     delete ui;
 }
 
-void Keyboard::init()
-{
-    setMinimumSize(QSize(430,130));
-
-    QWidget *parentW = parentWidget();
-    if(parentW)
-    {
-        int parentWidth = parentW->width();
-        int parentHeight = parentW->height();
-
-        int positionX = 0;
-        int positionY = parentHeight;
-
-        setGeometry(positionX, positionY, parentWidth, parentHeight/3);
-    }
-
-    connect(ui->toolButton_Enter, &Keys::enter, this, [=](){emit enterSig();});
-    connect(ui->toolButton_CapsLk, &Keys::capsLk, this, &Keyboard::converUpLow);
-
-    m_popUptimer = new QTimer(this);
-    m_popIntimer = new QTimer(this);
-
-    setWindowFlags(Qt::FramelessWindowHint);
-}
-
 void Keyboard::converUpLow()
 {
     if(!m_letterState)
@@ -170,6 +145,46 @@ void Keyboard::paintEvent(QPaintEvent *event)
     QPainterPath path;
     path.addRoundedRect(QRectF(0, 0, width(), height()) , 5, 5);
     painter.drawPath(path.simplified());
+}
+
+void Keyboard::timerEvent(QTimerEvent *event)
+{
+    if(event->timerId() == m_kbTimerID && m_parentWidget != nullptr)
+    {
+        stretch();
+    }
+}
+
+void Keyboard::init()
+{
+    setMinimumSize(QSize(430,130));
+    setWindowFlags(Qt::FramelessWindowHint);
+
+    m_parentWidget = new QWidget;
+    m_parentWidget = parentWidget();
+
+    connect(ui->toolButton_Enter, &Keys::enter, this, [=](){emit enterSig();});
+    connect(ui->toolButton_CapsLk, &Keys::capsLk, this, &Keyboard::converUpLow);
+
+    m_popUptimer = new QTimer(this);
+    m_popIntimer = new QTimer(this);
+
+    m_kbTimerID = startTimer(10);
+}
+
+void Keyboard::stretch()
+{
+    if(this->popUpState() == false && this->popInState() == false)
+    {
+        if(this->state())           //隐藏状态
+        {
+            this->setGeometry(0, (m_parentWidget->height()/3)*2, m_parentWidget->width(), m_parentWidget->height()/3);
+        }
+        else                        //弹出状态
+        {
+            this->setGeometry(0, m_parentWidget->height(), m_parentWidget->width(), m_parentWidget->height()/3);
+        }
+    }
 }
 
 

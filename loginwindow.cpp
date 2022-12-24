@@ -17,19 +17,9 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::timerEvent(QTimerEvent *event)
 {
-    if(event->timerId() == m_kbTimerID)
+    if(event->timerId() == m_pWTimerId && m_parentWidget != nullptr)
     {
-        if(m_keyboard->popUpState() == false && m_keyboard->popInState() == false)
-        {
-            if(m_keyboard->state())     //隐藏状态
-            {
-                m_keyboard->setGeometry(0, (this->height()/3)*2, this->width(), this->height()/3);
-            }
-            else                        //弹出状态
-            {
-                m_keyboard->setGeometry(0, this->height(), this->width(), this->height()/3);
-            }
-        }
+        this->setGeometry(0, 0, m_parentWidget->width(), m_parentWidget->height());
     }
 
     if(event->timerId() == m_leTimerID && ui->passwordLineEdit->text()== "123456")
@@ -72,6 +62,9 @@ bool LoginWindow::eventFilter(QObject *watched, QEvent *event)
 
 void LoginWindow::init()
 {
+    m_parentWidget = new QWidget;
+    m_parentWidget = parentWidget();
+
     this->installEventFilter(this);
 
     QRegExp regx("[a-zA-Z0-9]+$");
@@ -87,6 +80,7 @@ void LoginWindow::init()
     ui->passwordLineEdit->installEventFilter(this);
 
     m_keyboard = new Keyboard(this);
+
+    m_pWTimerId = startTimer(20);
     m_leTimerID = startTimer(100);
-    m_kbTimerID = startTimer(10);
 }

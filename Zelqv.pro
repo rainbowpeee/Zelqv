@@ -24,7 +24,8 @@ SOURCES += \
 HEADERS += \
     3rd/md5.h \
     loginwindow.h \
-    mainwindow.h
+    mainwindow.h \
+    subpage.h
 
 FORMS += \
     loginwindow.ui \
@@ -39,5 +40,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 include($$PWD/controls/controls.pri)
 
 ###################### 第三方库 ######################
-
-
+#OpenCV
+INCLUDEPATH += D:\Dependencies\opencv\mingw_build_qt\install\include
+#LIBS += D:\Dependencies\opencv\mingw_build_qt\lib\libopencv_*.a
+LIBS += D:\Dependencies\opencv\mingw_build_qt\install\x64\mingw\lib\libopencv_*.a

@@ -20,11 +20,6 @@ public:
     ~Keyboard();
 
     /**
-     * @brief init  初始化
-     */
-    void init();
-
-    /**
      * @brief converUpLow   大小写字母转换
      */
     void converUpLow();
@@ -50,19 +45,29 @@ signals:
 protected:
     virtual void paintEvent(QPaintEvent *event) override;
 
+    virtual void timerEvent(QTimerEvent *event) override;
+
+private:
+    void init();
+
+    void stretch();
+
 private:
     Ui::Keyboard *ui;
+
+    QWidget *m_parentWidget = nullptr;
 
     bool m_state = false;       //是否隐藏状态标志
     bool m_popUpState = false;  //弹出中的状态标志
     bool m_popInState = false;  //弹入中的状态标志
+    bool m_letterState = false; //大小写标志，默认小写
 
     QTimer *m_popUptimer = nullptr; //弹出计时器
     int m_uptimerID = -1;
     QTimer *m_popIntimer = nullptr; //弹入计时器
     int m_intimerID = -1;
 
-    bool m_letterState = false; //小写
+    int m_kbTimerID = -1;
 
 };
 #endif // KEYBOARD

@@ -42,12 +42,12 @@ private:
 private:
     Ui::LoginWindow *ui;
 
-    int m_leTimerID = -1;
-    int m_kbTimerID = -1;
+    QWidget *m_parentWidget = nullptr;
 
+    int m_pWTimerId = -1;
+    int m_leTimerID = -1;
 
     Keyboard *m_keyboard;
-
 };
 
 #endif // LOGINWINDOW_H
