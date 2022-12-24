@@ -17,7 +17,7 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::timerEvent(QTimerEvent *event)
 {
-    if(event->timerId() == m_pWTimerId && m_parentWidget != nullptr)
+    if(event->timerId() == m_pWTimerID && m_parentWidget != nullptr)
     {
         this->setGeometry(0, 0, m_parentWidget->width(), m_parentWidget->height());
     }
@@ -81,6 +81,6 @@ void LoginWindow::init()
 
     m_keyboard = new Keyboard(this);
 
-    m_pWTimerId = startTimer(20);
+    m_pWTimerID = startTimer(20);
     m_leTimerID = startTimer(100);
 }
