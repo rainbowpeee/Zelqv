@@ -7,7 +7,6 @@ Keys::Keys(QWidget *parent) : QToolButton(parent)
 
 void Keys::isClicked()
 {
-    //this->text() ----获得控件上的文本内容，比如，删除
     if(this->text() == "<-")
     {
         popUp();

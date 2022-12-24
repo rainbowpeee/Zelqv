@@ -17,32 +17,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     3rd/md5.cpp \
-    adminwindow.cpp \
-    loginwindow.cpp \
-    main.cpp \
-    mainwindow.cpp
+    main.cpp
 
 HEADERS += \
     3rd/md5.h \
-    adminwindow.h \
-    loginwindow.h \
-    mainwindow.h \
-    subpage.h
-
-FORMS += \
-    loginwindow.ui \
-    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-####################### 控件库 #######################
-include($$PWD/controls/controls.pri)
+####################### 界面 #########################
+include($$PWD/UI/UI.pri)
 
 ###################### 第三方库 ######################
 #OpenCV
 INCLUDEPATH += D:\Dependencies\opencv\mingw_build_qt\install\include
 #LIBS += D:\Dependencies\opencv\mingw_build_qt\lib\libopencv_*.a
 LIBS += D:\Dependencies\opencv\mingw_build_qt\install\x64\mingw\lib\libopencv_*.a
+
+
+
+

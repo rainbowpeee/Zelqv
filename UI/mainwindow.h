@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
-#include "subpage.h"
-
+#include "UI/subpage/subpage.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

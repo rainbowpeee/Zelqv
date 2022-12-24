@@ -1483,7 +1483,7 @@ QToolButton:pressed{
   <customwidget>
    <class>Keys</class>
    <extends>QToolButton</extends>
-   <header location="global">controls/keyboard/keys.h</header>
+   <header location="global">UI/zwidget/keyboard/keys.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QTimer>
 #include <QDebug>
-#include "controls/keyboard/keyboard.h"
+#include "UI/zwidget/keyboard/keyboard.h"
 #include <QValidator>
 
 namespace Ui {

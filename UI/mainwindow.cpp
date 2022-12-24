@@ -8,7 +8,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     initUI();
-
 }
 
 MainWindow::~MainWindow()
@@ -18,8 +17,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::initUI()
 {
-//    m_lgW = new LoginWindow(this);
-    m_adW = new AdminWindow(this);
-
+    m_lgW = new LoginWindow(this);
+//    m_adW = new AdminWindow(this);
 }
 
