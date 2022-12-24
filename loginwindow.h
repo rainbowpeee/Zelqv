@@ -44,7 +44,7 @@ private:
 
     QWidget *m_parentWidget = nullptr;
 
-    int m_pWTimerId = -1;
+    int m_pWTimerID = -1;
     int m_leTimerID = -1;
 
     Keyboard *m_keyboard;

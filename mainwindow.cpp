@@ -18,6 +18,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::initUI()
 {
-    m_lgW = new LoginWindow(this);
+//    m_lgW = new LoginWindow(this);
+    m_adW = new AdminWindow(this);
+
 }
 

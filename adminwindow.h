@@ -24,6 +24,8 @@ signals:
 protected:
     void initUI();
 
+    virtual void timerEvent(QTimerEvent *event) override;
+
 private:
     bool initProfile();
 
@@ -37,6 +39,9 @@ protected:
     QStandardItemModel *m_tableModel = nullptr;
 
 private:
+    QWidget *m_parentWidget = nullptr;
+    int m_pWTimerID = -1;
+
     QSettings *m_userProfile = nullptr;
     QString m_filePath = QCoreApplication::applicationDirPath()+"/config/userprofile.ini";
 

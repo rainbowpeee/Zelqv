@@ -13,6 +13,9 @@ AdminWindow::AdminWindow(QWidget *parent) : QWidget(parent)
 
 void AdminWindow::initUI()
 {
+    m_parentWidget = new QWidget;
+    m_parentWidget = parentWidget();
+
     QFont font;
     font.setFamily(QString::fromUtf8("Century Gothic"));
     font.setPointSize(13);
@@ -36,6 +39,16 @@ void AdminWindow::initUI()
     gridLayout = new QGridLayout(this);
     gridLayout->addWidget(m_tableView, 0, 0, 1, 3);
     gridLayout->addWidget(m_addBtn, 1, 1, 1, 1);
+
+    m_pWTimerID = startTimer(20);
+}
+
+void AdminWindow::timerEvent(QTimerEvent *event)
+{
+    if(event->timerId() == m_pWTimerID && m_parentWidget != nullptr)
+    {
+        this->setGeometry(0, 0, m_parentWidget->width(), m_parentWidget->height());
+    }
 }
 
 bool AdminWindow::initProfile()
@@ -61,6 +74,5 @@ void AdminWindow::loadUserData()
 void AdminWindow::addUserData()
 {
     m_tableModel->setRowCount(m_tableModel->rowCount()+1);
-    m_tableModel->setData(m_tableModel->index(m_tableModel->rowCount(),1), "IDaa");
-//    m_userProfile->setValue();
+    m_tableModel->setData(m_tableModel->index(m_tableModel->rowCount(),1), "123");
 }

@@ -19,6 +19,7 @@ void LoginWindow::timerEvent(QTimerEvent *event)
 {
     if(event->timerId() == m_pWTimerID && m_parentWidget != nullptr)
     {
+        qDebug()<<m_parentWidget->width()<<m_parentWidget->height();
         this->setGeometry(0, 0, m_parentWidget->width(), m_parentWidget->height());
     }
 

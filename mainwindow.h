@@ -25,6 +25,7 @@ private:
     Ui::MainWindow *ui;
 
     LoginWindow *m_lgW;
+    AdminWindow *m_adW;
 
 };
 #endif // MAINWINDOW_H
