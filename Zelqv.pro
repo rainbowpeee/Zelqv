@@ -17,12 +17,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     3rd/md5.cpp \
+    adminwindow.cpp \
     loginwindow.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     3rd/md5.h \
+    adminwindow.h \
     loginwindow.h \
     mainwindow.h \
     subpage.h
